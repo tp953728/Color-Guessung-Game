@@ -1,48 +1,44 @@
 const button = document.querySelector('#changeColor');
 const questionColor = document.querySelector('#questionColor');
-const form = document.querySelector('form')
 const score = document.querySelector('#score')
 const text = document.querySelector('#text')
+const btns = document.querySelectorAll('.select')
+
+let ans = ''
 
 const compareAns = (e) => {
-    e.preventDefault();
-    const submit = document.querySelector('form > button')
-    submit.disabled = true;
-    const colorBlock = document.querySelectorAll('.colorBlock')
-    for (let [idx, block] of colorBlock.entries()) {
-        block.innerText = 'this is the color!'
-        block.style.backgroundColor = e.currentTarget.array[idx]
-    }
-    if (e.currentTarget.array[form.elements.color.value] == e.currentTarget.ans) {
+    const selected = e.target.innerText
+    if(selected === ans){
         text.innerText = "You Got It RIGHT!"
         score.innerText = parseInt(score.innerText) + 1
-    } else {
-        text.innerText = "WRONG! Try again!"
-        console.log('wrong')
+    } else{
+        text.innerText = 'wrong, ans is ' +  ans
+    }
+    for(let btn of btns){
+        if(btn !== e.target){
+            btn.disabled = true
+        }
     }
 }
 
 
 const generateQuestion = () => {
     text.innerText = ""
+    for(let btn of btns){
+        btn.disabled = false
+    }
     const newColor = makeRandColor();
+    ans = newColor
     questionColor.style.backgroundColor = newColor;
     array = [newColor, makeRandColor(), makeRandColor(), makeRandColor()]
-    makeForm(array);
-    form.array = array
-    form.ans = newColor
+    makeBtn(array);
 }
 
-const makeForm = (array) => {
-    form.innerText = ''
-    ans = shuffle(array)
+const makeBtn = (array) => {
+    shuffle(array)
     for (let [idx, color] of array.entries()) {
-        form.innerHTML +=
-            `<input type="radio" name="color" id="${idx}" value="${idx}"></input>
-            <label for="${idx}">${idx + 1}. ${color}</label>
-            <div class="colorBlock"></div>`
+        btns[idx].innerText = color;
     }
-    form.innerHTML += "<button>submit</button>"
 }
 
 const shuffle = (array) => {
@@ -62,7 +58,9 @@ const makeRandColor = () => {
     return `rgb(${r}, ${g}, ${b})`;
 }
 
+generateQuestion()
 
 button.addEventListener('click', generateQuestion)
-
-form.addEventListener('submit', compareAns)
+for(let btn of btns){
+    btn.addEventListener('click', compareAns)
+}
