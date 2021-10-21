@@ -14,18 +14,23 @@
     <div class="container">
         <div class="row">
             <div class="col-8 offset-2">
-                <h1>Welcome to Color Guessing Game!!</h1>
-                <h2>what is the RGB code of this color?</h2>
-                <div id="questionColor" class="mx-auto"></div>
-                <button class='select'></button>
-                <button class='select'></button>
-                <button class='select'></button>
-                <button class='select'></button>
-                <p id="text"></p>
-                <div>score: <span id="score">0</span></div>
-                <button id="changeColor">Next Question</button>
+                <h1 class="my-4">Welcome to Color Guessing Game!!</h1>
+                <div class="row">
+                    <div class="col-6">
+                        <h2>what is the RGB code of this color?</h2>
+                        <div id="questionColor" class="mx-auto mb-3"></div>
+                        <div class="mb-3">score: <span id="score">0</span></div>
+                    </div>
+                    <div class="col-6 my-auto d-grid gap-2">
+                        <button class='select btn'></button>
+                        <button class='select btn'></button>
+                        <button class='select btn'></button>
+                        <button class='select btn'></button>
+                    </div>
+                </div>
             </div>
         </div>
+        <button id="changeColor" class="btn btn-secondary">Next Question</button>
     </div>
 
     <script src="app.js"></script>

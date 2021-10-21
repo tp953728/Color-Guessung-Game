@@ -1,31 +1,34 @@
 const button = document.querySelector('#changeColor');
 const questionColor = document.querySelector('#questionColor');
 const score = document.querySelector('#score')
-const text = document.querySelector('#text')
 const btns = document.querySelectorAll('.select')
 
 let ans = ''
 
 const compareAns = (e) => {
     const selected = e.target.innerText
-    if(selected === ans){
-        text.innerText = "You Got It RIGHT!"
+    if (selected === ans) {
         score.innerText = parseInt(score.innerText) + 1
-    } else{
-        text.innerText = 'wrong, ans is ' +  ans
     }
-    for(let btn of btns){
-        if(btn !== e.target){
+    for (let btn of btns) {
+        btn.style.backgroundColor = btn.innerText;
+        if (btn !== e.target) {
             btn.disabled = true
+        }
+        if (btn.innerText === ans) {
+            btn.style.border = '3px solid #00c853'
+        } else {
+            btn.style.border = '3px solid #f44336'
         }
     }
 }
 
 
 const generateQuestion = () => {
-    text.innerText = ""
-    for(let btn of btns){
+    for (let btn of btns) {
         btn.disabled = false
+        btn.style.backgroundColor = '';
+        btn.style.border = ''
     }
     const newColor = makeRandColor();
     ans = newColor
@@ -61,6 +64,6 @@ const makeRandColor = () => {
 generateQuestion()
 
 button.addEventListener('click', generateQuestion)
-for(let btn of btns){
+for (let btn of btns) {
     btn.addEventListener('click', compareAns)
 }

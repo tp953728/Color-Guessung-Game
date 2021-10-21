@@ -3,6 +3,23 @@ body{
 }
 
 #questionColor{
-    width:15vw;
-    height: 15vw;
+    width:20vw;
+    height: 20vw;
+}
+
+.select{
+    height: 3em;
+    font-size: 1.5vw;
+    border: 1px solid rgba(0,0,0,0.3);
+    box-shadow: 0.2em 0.2em 0.1em rgba(0,0,0,0.3);
+    transition: all 0.3s;
+}
+
+.select:hover{
+    box-shadow: none;
+    transform: translateX(0.1em);
+}
+
+h2{
+    font-size: 2vw;
 }
